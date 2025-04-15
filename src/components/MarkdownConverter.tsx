@@ -71,7 +71,7 @@ const MarkdownConverter = () => {
             </Button>
           </div>
         </div>
-        <div className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4">
+        <div className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 whitespace-pre-wrap font-mono">
           {markdown || <span className="text-gray-400">Preview will appear here...</span>}
         </div>
       </div>
