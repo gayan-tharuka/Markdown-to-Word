@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { Copy, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { marked } from "marked";
 
 const MarkdownConverter = () => {
   const [markdown, setMarkdown] = useState("");
@@ -17,6 +18,7 @@ const MarkdownConverter = () => {
   }, [markdown, toast]);
 
   const handleDownload = useCallback(() => {
+    // Create a blob with the markdown content
     const blob = new Blob([markdown], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -32,6 +34,16 @@ const MarkdownConverter = () => {
       description: "Your Word document has been downloaded successfully.",
     });
   }, [markdown, toast]);
+
+  // Parse markdown to HTML
+  const parsedHTML = useCallback(() => {
+    try {
+      return { __html: marked(markdown) };
+    } catch (error) {
+      console.error("Error parsing markdown:", error);
+      return { __html: markdown };
+    }
+  }, [markdown]);
 
   return (
     <div className="grid h-[calc(100vh-5rem)] grid-cols-1 gap-4 p-4 md:grid-cols-2">
@@ -71,8 +83,11 @@ const MarkdownConverter = () => {
             </Button>
           </div>
         </div>
-        <div className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 whitespace-pre-wrap font-mono">
-          {markdown || <span className="text-gray-400">Preview will appear here...</span>}
+        <div 
+          className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4"
+          dangerouslySetInnerHTML={parsedHTML()}
+        >
+          {!markdown && <span className="text-gray-400">Preview will appear here...</span>}
         </div>
       </div>
     </div>
