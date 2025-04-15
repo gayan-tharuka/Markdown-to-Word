@@ -83,12 +83,16 @@ const MarkdownConverter = () => {
             </Button>
           </div>
         </div>
-        <div 
-          className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4"
-          dangerouslySetInnerHTML={parsedHTML()}
-        >
-          {!markdown && <span className="text-gray-400">Preview will appear here...</span>}
-        </div>
+        {markdown ? (
+          <div 
+            className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4"
+            dangerouslySetInnerHTML={parsedHTML()}
+          />
+        ) : (
+          <div className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4">
+            <span className="text-gray-400">Preview will appear here...</span>
+          </div>
+        )}
       </div>
     </div>
   );
