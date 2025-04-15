@@ -85,7 +85,7 @@ const MarkdownConverter = () => {
         </div>
         {markdown ? (
           <div 
-            className="flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4"
+            className="markdown-preview flex-1 overflow-auto rounded-md border border-gray-200 bg-gray-50 p-4 prose prose-sm max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-strong:text-gray-800 prose-ul:list-disc prose-ol:list-decimal prose-li:my-1 prose-pre:bg-gray-100 prose-pre:p-4 prose-pre:rounded-md prose-code:text-purple-600 prose-blockquote:border-l-4 prose-blockquote:border-purple-500 prose-blockquote:pl-4 prose-blockquote:italic prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:p-2 prose-td:border prose-td:border-gray-300 prose-td:p-2"
             dangerouslySetInnerHTML={parsedHTML()}
           />
         ) : (
